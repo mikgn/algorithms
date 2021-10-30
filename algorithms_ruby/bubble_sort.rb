@@ -1,23 +1,34 @@
-arr = (1..30).to_a.shuffle
+# frozen_string_literal: true
 
-def bubble_sort(array)
-  return array if array.length <= 1
-  n = array.length
+# bubble sort
+#
+module BubbleSort
+  class << self
+    def call(array)
+      return array if array.length <= 1
 
-  loop do
-    swapped = false
-
-    (n - 1).times do |i|
-      if array[i] > array[i + 1]
-        array[i], array[i + 1] = array[i + 1], array[i]
-        swapped = true
-      end
+      sort_array(array)
     end
 
-    break if swapped == false
-  end
+    private
 
-  array
+    def sort_array(array)
+      loop do
+        swapped = false
+
+        (array.length - 1).times do |i|
+          next if array[i] < array[i + 1]
+
+          array[i], array[i + 1] = array[i + 1], array[i]
+          swapped = true
+        end
+
+        break if swapped == false
+      end
+      array
+    end
+  end
 end
 
-p bubble_sort(arr)
+arr = (1..30).to_a.shuffle
+p BubbleSort.call(arr)
