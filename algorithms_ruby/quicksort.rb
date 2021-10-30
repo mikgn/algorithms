@@ -1,29 +1,33 @@
-arr = (1..1_000_000).to_a.shuffle
+# frozen_string_literal: true
 
-def quicksort(array)
-  return array if array.length <= 1
+# quick sort
+#
+module QuickSort
+  class << self
+    def call(array)
+      return array if array.length <= 1
 
-  pivot = array.sample
-  array.delete_at(array.index(pivot))
+      sort_array(array)
+    end
 
-  less  = []
-  greater = []
+    private
 
-  array.each do |el|
-    if el <= pivot
-      less << el
-    else
-      greater << el
+    def sort_array(array)
+      pivot = array.sample
+      array.delete_at(array.index(pivot))
+
+      less = []
+      greater = []
+
+      array.each { |element| element < pivot ? less << element : greater << element }
+
+      [QuickSort.call(less), pivot, QuickSort.call(greater)].flatten
     end
   end
-
-  sorted_array = []
-  sorted_array += quicksort(less)
-  sorted_array << pivot
-  sorted_array += quicksort(greater)
-  sorted_array
 end
 
+arr = (1..1_000_000).to_a.shuffle
+
 start = Time.now
-quicksort(arr)
+QuickSort.call(arr)
 p Time.now - start
