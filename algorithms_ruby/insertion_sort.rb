@@ -1,20 +1,34 @@
-arr = (1..3_000).to_a.shuffle
+# frozen_string_literal: true
 
-def insertion_sort(array)
-  for i in 1...(array.length)
-    j = i
-    while j > 0
-      if array[j-1] > array[j]
-        temp = array[j]
-        array[j] = array[j-1]
-        array[j-1] = temp
-      else
-        break
+# insertion sort
+#
+module InsertionSort
+  class << self
+    def call(array)
+      return array if array.length <= 1
+
+      sort_array(array)
+    end
+
+    private
+
+    def sort_array(array)
+      (1...array.length).each do |i|
+        j = i
+
+        while j.positive?
+          break if array[j - 1] < array[j]
+
+          array[j], array[j - 1] = array[j - 1], array[j]
+
+          j -= 1
+        end
       end
 
-      j -= 1
+      array
     end
   end
-
-  array
 end
+
+arr = (1..300).to_a.shuffle
+p InsertionSort.call(arr)
