@@ -14,6 +14,7 @@ module QuickSort
 
     def sort_array(array)
       pivot = array.sample
+
       array.delete_at(array.index(pivot))
 
       less = []
@@ -25,9 +26,3 @@ module QuickSort
     end
   end
 end
-
-arr = (1..1_000_000).to_a.shuffle
-
-start = Time.now
-QuickSort.call(arr)
-p Time.now - start

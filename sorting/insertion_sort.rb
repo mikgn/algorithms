@@ -29,6 +29,3 @@ module InsertionSort
     end
   end
 end
-
-arr = (1..300).to_a.shuffle
-p InsertionSort.call(arr)

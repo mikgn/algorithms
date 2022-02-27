@@ -37,7 +37,3 @@ module BSearch
     end
   end
 end
-
-
-arr = (1..10_000_000).to_a
-p BSearch.call(arr, 4_347_768)

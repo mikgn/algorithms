@@ -20,15 +20,14 @@ module BubbleSort
           next if array[i] < array[i + 1]
 
           array[i], array[i + 1] = array[i + 1], array[i]
+
           swapped = true
         end
 
         break if swapped == false
       end
+
       array
     end
   end
 end
-
-arr = (1..30).to_a.shuffle
-p BubbleSort.call(arr)
